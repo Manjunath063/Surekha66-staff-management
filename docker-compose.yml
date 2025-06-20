@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  backend:
+    build: ./Backend
+    container_name: staff-backend66
+    ports:
+      - "3026:3026"
+    depends_on:
+      - postgres
+    environment:
+      - PORT=3026
+      - DB_USER=postgres
+      - DB_PASSWORD=admin123
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_NAME=staff_management
+    volumes:
+      - ./Backend:/app
+
+  staff:
+    build: ./Staff
+    container_name: staff-frontend66
+    ports:
+      - "8046:80"
+    depends_on:
+      - backend
+
+  postgres:
+    image: postgres:13
+    container_name: staff-db66
+    ports:
+      - "5421:5432"
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=admin123
+      - POSTGRES_DB=staff_management
+    volumes:
+      - pgdata66:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
+volumes:
+  pgdata66:
+
