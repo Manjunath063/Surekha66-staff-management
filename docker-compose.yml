@@ -5,7 +5,7 @@ services:
     build: ./Backend
     container_name: staff-backend66
     ports:
-      - "3026:3026"
+      - "3605:3605"
     depends_on:
       - postgres
     environment:
@@ -22,7 +22,7 @@ services:
     build: ./Staff
     container_name: staff-frontend66
     ports:
-      - "8046:80"
+      - "8610:80"
     depends_on:
       - backend
 
@@ -30,7 +30,7 @@ services:
     image: postgres:13
     container_name: staff-db66
     ports:
-      - "5421:5432"
+      - "5605:5432"
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=admin123
